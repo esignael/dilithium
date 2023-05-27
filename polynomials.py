@@ -1,6 +1,6 @@
 import random
 from copy import deepcopy
-from utils import *
+from .utils import *
 
 class PolynomialRing:
     """
@@ -424,19 +424,20 @@ class PolynomialRing:
 
             info = []
             for i,c in enumerate(self.coeffs):
-                if c != 0:
-                    if i == 0:
-                        info.append(f"{c}")
-                    elif i == 1:
-                        if c == 1:
-                            info.append("x")
-                        else:
-                            info.append(f"{c}*x")
+                if c == 0:
+                    continue
+                if i == 0:
+                    info.append(f"{c}")
+                elif i == 1:
+                    if c == 1:
+                        info.append("x")
                     else:
-                        if c == 1:
-                            info.append(f"x^{i}")
-                        else:
-                            info.append(f"{c}*x^{i}")
+                        info.append(f"{c}*x")
+                else:
+                    if c == 1:
+                        info.append(f"x^{i}")
+                    else:
+                        info.append(f"{c}*x^{i}")
             return " + ".join(info) + ntt_info
 
         def __str__(self):
